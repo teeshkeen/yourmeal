@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/scss';
 import 'swiper/css/free-mode';
@@ -10,9 +9,8 @@ import LogoPrimary from './assets/images/logoPrimary.svg';
 import phoneIcon from './assets/icons/call.svg';
 import telegramIcon from './assets/icons/tg.svg';
 import vkontakteIcon from './assets/icons/vk.svg';
-import deliveryIcon from './assets/icons/delivery.svg'
-import closeIcon from './assets/icons/close.svg'
-
+import deliveryIcon from './assets/icons/delivery.svg';
+import closeIcon from './assets/icons/close.svg';
 const products = [
   {
     id: 1,
@@ -120,6 +118,7 @@ const products = [
 ];
 
 function App() {
+
   const [cart, setCart] = useState([]);
   const [selectedSlide, setSelectedSlide] = useState(products[0]);
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
@@ -144,24 +143,30 @@ function App() {
   };
 
   const openProductModal = (product) => {
-    const scrollY = document.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `${scrollY}px`;
-    document.body.style.width = '100%';
+    if (window.innerWidth < 475) {
+      const scrollY = document.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `${scrollY}px`;
+      document.body.style.width = '100%';
+    }
+
     isCartModalOpen ? setIsCartModalOpen(false) : null;
     setSelectedProduct(product);
     setIsProductModalOpen(true);
-  }
+  };
 
   const closeCartModal = () => {
     setIsCartModalOpen(false);
   };
 
   const closeProductModal = () => {
-    const scrollY = document.body.style.top;
-    document.body.style.position = '';
-    document.body.style.top = '';
-    window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    if (window.innerWidth < 475) {
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    }
+    
     setIsProductModalOpen(false);
     setSelectedProduct(null);
   };
@@ -193,24 +198,26 @@ function App() {
 
   const calculateTotalQuantity = () => {
     return cart.reduce((total, item) => total + item.quantity, 0);
-};
+  };
 
   return (
-    <div className="container">
+    <div className="app">
       <header className="header">
-        <div className="header_background"></div>
-        <div className="header_inner">
-          <img className='header_logo' src={Logo} alt="" />
-          <div className="header_content">
-            <p className='header_content-typography'>Только самые <br /> <span>сочные бургеры!</span></p>
-            <span className='header_content-delivery'>Бесплатная доставка от 599₽</span>
-            <img src={Burger} alt="" />
+        <div className="header__background"></div>
+        <div className="header__inner">
+          <img className='header__logo' src={Logo} alt="Логотип" />
+          <div className="header__content">
+            <div className="header__content-text">
+              <p className='header__content-slogan'>Только самые <br /> <span>сочные бургеры!</span></p>
+              <span className='header__content-delivery'>Бесплатная доставка от 599₽</span>
+            </div>
+            <img src={Burger} alt="Бургер" />
           </div>
         </div>
       </header>
       <div className="categories">
-        <div className="categories_inner">
-          <div className="categories_slider">
+        <div className="categories__inner">
+          <div className="categories__slider">
             <Swiper
               spaceBetween={8}
               slidesPerView={3}
@@ -219,7 +226,6 @@ function App() {
                 const newSlide = products[swiper.activeIndex];
                 setSelectedSlide(newSlide);
               }}
-              onSwiper={(swiper) => console.log(swiper)}
               breakpoints={{
                 360: {
                   spaceBetween: 8,
@@ -227,25 +233,41 @@ function App() {
                 },
                 570: {
                   slidesOffsetBefore: 30,
+                  slidesPerView: 5,
                   spaceBetween: 10,
-                  slidesPerView: 4,
                 },
                 600: {
                   slidesPerView: 5,
                 },
                 768: {
-                  slidesOffsetBefore: 64,
+                  slidesOffsetBefore: 54,
                   spaceBetween: 12,
-                  slidesPerView: 6,
+                  slidesPerView: 7,
+                },
+                1024: {
+                  slidesOffsetBefore: 32,
+                  spaceBetween: 24,
+                  slidesPerView: 7
+                },
+                1280: {
+                  slidesPerView: 9,
+                  slidesOffsetBefore: 32,
+                  slidesOffsetAfter: 32,
+                  spaceBetween: 24
+                },
+                1440: {
+                  slidesPerView: 10,
+                  slidesOffsetBefore: 75,
+                  slidesOffsetAfter: 75,
+                  spaceBetween: 24
                 }
               }}
-
             >
               {products.map((i) => (
                 <SwiperSlide key={i.id}>
-                  <div onClick={() => handleSelectSlide(i)} className={`slider_item ${selectedSlide.id === i.id ? 'choosed' : ''}`}>
-                    <img className="slider_item-image" src={i.image} alt={i.name} />
-                    <span className='slider_item-name'>{i.name}</span>
+                  <div onClick={() => handleSelectSlide(i)} className={`slider__item ${selectedSlide.id === i.id ? 'slider__item--choosed' : ''}`}>
+                    <img className="slider__item-image" src={i.image} alt={i.name} />
+                    <span className='slider__item-name'>{i.name}</span>
                   </div>
                 </SwiperSlide>
               ))}
@@ -254,115 +276,168 @@ function App() {
         </div>
       </div>
       <div className="cart" ref={cartRef} onClick={openCartModal}>
-        <div className="cart_inner">
-          <div className="cart_header">
-            <div className="cart_header-title">Корзина</div>
-            <div className="cart_header-count">{calculateTotalQuantity()}</div>
+        <div className="cart__inner">
+          <div className="cart__header">
+            <div className="cart__header-title">Корзина</div>
+            <div className="cart__header-count">{calculateTotalQuantity()}</div>
           </div>
         </div>
       </div>
-      <div className="products">
-        <div className="products_inner">
-          <div className="products_header">{selectedSlide.name}</div>
-          <div className="products_list">
-            {selectedSlide.products.map((product) => (
-              <div className="products_list-item" key={product.id} onClick={() => openProductModal(product)}>
-                <img className='item-image' src={product.image} alt={product.name} />
-                <div className='item-desc'>
-                  <div className="item-desc_main">
-                    <div className="item-desc_main-cost">{product.price}₽</div>
-                    <div className="item-desc_main-name">{product.name}</div>
-                  </div>
-                  <div className="item-desc_weight">{product.weight}</div>
+      <div className="block">
+        <div className="cart-desktop">
+      <div className="cart-modal">
+          <div className="cart-modal__content">
+            <div className="modal-cart">
+              <div className="modal-cart__inner">
+                <div className="cart__header">
+                  <div className="cart__header-title">Корзина</div>
+                  <div className="cart__header-count">{calculateTotalQuantity()}</div>
                 </div>
-                <div className="item-btn" onClick={(e) => { e.stopPropagation(); addToCart(product); }}>Добавить</div>
+                {calculateTotalQuantity() === 0 ? (
+                  <div className="cart__empty">Тут пока пусто ;(</div>
+                ) : (
+                  <div className="cart__products">
+                    {cart.map(item => (
+                      <div className="cart__products-item" key={item.id}>
+                        <div className='cart__products-item-info'>
+                          <img className='cart__products-item-image' src={item.image} alt={item.name} />
+                          <div className="cart__products-item-text">
+                            <div className="cart__products-item-text-title">{item.name}</div>
+                            <div className="cart__products-item-text-weight">{item.weight}</div>
+                            <div className="cart__products-item-text-cost">{item.price}₽</div>
+                          </div>
+                        </div>
+                        <div className="cart__products-item-counter">
+                          <div className="cart__products-item-counter-element" onClick={() => updateQuantity(item.id, -1)}>-</div>
+                          <div className='cart__products-item-counter-element'>{item.quantity}</div>
+                          <div className="cart__products-item-counter-element" onClick={() => updateQuantity(item.id, 1)}>+</div>
+                        </div>
+                      </div>
+                    ))}
+                    <div className="modal-cart__total">
+                      <span>Итого</span>
+                      {calculateTotal() > 600 ? (
+                        <span>{calculateTotal()}₽</span>
+                      ) : (
+                        <span>{calculateTotal() + (calculateTotal() * 30 / 100)}₽</span>
+                      )}
+                    </div>
+                    <div className='modal-cart__submit'>Оформить заказ</div>
+                    <div className="modal-cart__footer">
+                      <div className="modal-cart__footer-delivery">
+                        <img src={deliveryIcon} alt="Доставка" />
+                        {calculateTotal() > 600 ? (
+                          <span>Доставка бесплатно!</span>
+                        ) : (
+                          <span>Доставка {calculateTotal() * 30 / 100}₽</span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      <div className="products">
+        <div className="products__inner">
+          <div className="products__header">{selectedSlide.name}</div>
+          <div className="products__list">
+            {selectedSlide.products.map((product) => (
+              <div className="products__list-item" key={product.id} onClick={() => openProductModal(product)}>
+                <img className='products__item-image' src={product.image} alt={product.name} />
+                <div className='products__item-desc'>
+                  <div className="products__item-desc-main">
+                    <div className="products__item-desc-main-cost">{product.price}₽</div>
+                    <div className="products__item-desc-main-name">{product.name}</div>
+                  </div>
+                  <div className="products__item-desc-weight">{product.weight}</div>
+                </div>
+                <div className="products__item-btn" onClick={(e) => { e.stopPropagation(); addToCart(product); }}>Добавить</div>
               </div>
             ))}
           </div>
         </div>
       </div>
+      </div>
       <footer className="footer">
-        <div className="footer_inner">
-          <img className='footer_logo' src={LogoPrimary} alt="YourMeal" />
-          <div className="footer_phone">
-            <div className="footer_phone-title">
-              Номер для заказа
+        <div className="footer__inner">
+          <div className="footer__block">
+          <img className='footer__logo' src={LogoPrimary} alt="YourMeal" />
+          <div className="footer__contacts">
+            <div className="footer__phone">
+              <div className="footer__phone-title">Номер для заказа</div>
+              <div className="footer__phone-content">
+                <img className='footer__phone-icon' src={phoneIcon} alt="Телефон" />
+                <a className='footer__phone-link' href="tel:+7(930)833-38-11">+7(930)833-38-11</a>
+              </div>
             </div>
-            <div className="footer_phone-content">
-              <img className='phone-icon' src={phoneIcon} alt="YourMeal" />
-              <a className='phone-link' href="tel:+7(930)833-38-11">+7(930)833-38-11</a>
+            <div className="footer__social">
+              <div className="footer__social-title">Мы в соцсетях</div>
+              <div className="footer__social-content">
+                <img src={vkontakteIcon} alt="VK" />
+                <img src={telegramIcon} alt="Telegram" />
+              </div>
             </div>
           </div>
-          <div className="footer_social">
-            <div className="footer_social-title">
-              Мы в соцсетях
-            </div>
-            <div className="footer_social-content">
-              <img src={vkontakteIcon} alt="YourMeal" />
-              <img src={telegramIcon} alt="YourMeal" />
-            </div>
           </div>
-          <div className="footer_desc">
-            © YouMeal, 2022
-          </div>
+          <div className="footer__desc">© YouMeal, 2022</div>
         </div>
       </footer>
 
       {isCartModalOpen && (
         <div className="cart-modal" style={{ top: modalPosition.top, left: modalPosition.left }}>
-          <div className="cart-modal_content">
+          <div className="cart-modal__content">
             <div className="modal-cart">
-              <div className="modal-cart_inner">
-                <div className="cart_header" onClick={() => closeCartModal()}>
-                  <div className="cart_header-title">Корзина</div>
-                  <div className="cart_header-count">{calculateTotalQuantity()}</div>
+              <div className="modal-cart__inner">
+                <div className="cart__header" onClick={() => closeCartModal()}>
+                  <div className="cart__header-title">Корзина</div>
+                  <div className="cart__header-count">{calculateTotalQuantity()}</div>
                 </div>
-                {calculateTotalQuantity() == 0 ? (
-                  <div className="cart_empty">Тут пока пусто ;(</div>
+                {calculateTotalQuantity() === 0 ? (
+                  <div className="cart__empty">Тут пока пусто ;(</div>
                 ) : (
-                  <div className="block">
-                    <div className="cart_products">
-                  {cart.map(item => (
-                    <div className="cart_products-item" key={item.id}>
-                    <div className='cart_products-item_info'>
-                      <img className='cart_products-item_image' src={item.image} alt={item.name} />
-                      <div className="cart_products-item_text">
-                        <div className="cart_products-item_text-title">{item.name}</div>
-                        <div className="cart_products-item_text-weight">{item.weight}</div>
-                        <div className="cart_products-item_text-cost">{item.price}₽</div>
+                  <div className="cart__products">
+                    {cart.map(item => (
+                      <div className="cart__products-item" key={item.id}>
+                        <div className='cart__products-item-info'>
+                          <img className='cart__products-item-image' src={item.image} alt={item.name} />
+                          <div className="cart__products-item-text">
+                            <div className="cart__products-item-text-title">{item.name}</div>
+                            <div className="cart__products-item-text-weight">{item.weight}</div>
+                            <div className="cart__products-item-text-cost">{item.price}₽</div>
+                          </div>
+                        </div>
+                        <div className="cart__products-item-counter">
+                          <div className="cart__products-item-counter-element" onClick={() => updateQuantity(item.id, -1)}>-</div>
+                          <div className='cart__products-item-counter-element'>{item.quantity}</div>
+                          <div className="cart__products-item-counter-element" onClick={() => updateQuantity(item.id, 1)}>+</div>
+                        </div>
+                      </div>
+                    ))}
+                    <div className="modal-cart__total">
+                      <span>Итого</span>
+                      {calculateTotal() > 600 ? (
+                        <span>{calculateTotal()}₽</span>
+                      ) : (
+                        <span>{calculateTotal() + (calculateTotal() * 30 / 100)}₽</span>
+                      )}
+                    </div>
+                    <div className='modal-cart__submit'>Оформить заказ</div>
+                    <div className="modal-cart__footer">
+                      <div className="modal-cart__footer-delivery">
+                        <img src={deliveryIcon} alt="Доставка" />
+                        {calculateTotal() > 600 ? (
+                          <span>Доставка бесплатно!</span>
+                        ) : (
+                          <span>Доставка {calculateTotal() * 30 / 100}₽</span>
+                        )}
+                      </div>
+                      <div onClick={() => closeCartModal()} className="modal-cart__footer-close">
+                        Свернуть
                       </div>
                     </div>
-                    <div className="cart_products-item_counter">
-                      <div className="cart_products-item_counter-element" onClick={() => updateQuantity(item.id, -1)}>-</div>
-                      <div className='cart_products-item_counter-element'>{item.quantity}</div>
-                      <div className="cart_products-item_counter-element" onClick={() => updateQuantity(item.id, 1)}>+</div>
-                    </div>
-                  </div>
-                  ))}
-                </div>
-                <div className="modal-cart_total">
-                  <span>Итого</span>
-                  {calculateTotal() > 600 ? (
-                    <span>{calculateTotal()}₽</span>
-                  ) : (
-                    <span>{calculateTotal() + (calculateTotal() * 30 / 100)}₽</span>
-                    
-                    )}
-                </div>
-                <div className='modal-cart_submit'>Оформить заказ</div>
-                <div className="modal-cart_footer">
-                  <div className="modal-cart_footer-delivery">
-                    <img src={deliveryIcon} alt="Delivery free" />
-                    { calculateTotal() > 600 ? (
-                      <span>Доставка бесплатно!</span>
-                    ) : (
-                      <span>Доставка {calculateTotal() * 30 / 100}₽</span>
-                    )}
-                  </div>
-                  <div onClick={() => closeCartModal()} className="modal-cart_footer-close">
-                    Свернуть
-                  </div>
-                </div>
                   </div>
                 )}
               </div>
@@ -372,34 +447,39 @@ function App() {
       )}
       {isProductModalOpen && selectedProduct && (
         <div className="product-modal">
-          <div className="product-modal_content">
-            <div className="product-modal_content-group">
-              <div className="product-modal_content-close">
-                <img onClick={() => closeProductModal()} src={closeIcon} alt="Close icon" />
+          <div className="product-modal__content">
+            <div className="product-modal__content-group">
+              <div className="product-modal__content-close">
+                <img onClick={() => closeProductModal()} src={closeIcon} alt="Закрыть" />
               </div>
-              <div className="product-modal_content-item">
-                <span className='product-modal_content-item_title'>{selectedProduct.name}</span>
-                <img className="product-modal_content-item_image" src={selectedProduct.image} alt={selectedProduct.name} />
-                <p className='product-modal_content-item_description'>
+              <div className="product-modal__content-item">
+                <span className='product-modal__content-item-title'>{selectedProduct.name}</span>
+                <div className="product-modal__content-item-block">
+                <img className="product-modal__content-item-image" src={selectedProduct.image} alt={selectedProduct.name} />
+                <div className="product-modal__content-item-block-text">
+                <p className='product-modal__content-item-description'>
                   Супер мясное наслаждение! Большая рубленая котлета из свежего говяжего мяса покорит вас своей сочностью, а хрустящие листья салата добавят свежести.
                 </p>
-                <div className="product-modal_content-item_makeup">
-                  <div className="product-modal_content-item_makeup-title">Состав:</div>
-                  <ul className="product-modal_content-item_makeup-list">
-                    <li className="product-modal_content-item_makeup-list_item">Пшеничная булочка</li>
-                    <li className="product-modal_content-item_makeup-list_item">Котлета из говядины</li>
-                    <li className="product-modal_content-item_makeup-list_item">Красный лук</li>
-                    <li className="product-modal_content-item_makeup-list_item">Листья салата</li>
-                    <li className="product-modal_content-item_makeup-list_item">Соус сорчичный</li>
+                <div className="product-modal__content-item-makeup">
+                  <div className="product-modal__content-item-makeup-title">Состав:</div>
+                  <ul className="product-modal__content-item-makeup-list">
+                    <li className="product-modal__content-item-makeup-list-item">Пшеничная булочка</li>
+                    <li className="product-modal__content-item-makeup-list-item">Котлета из говядины</li>
+                    <li className="product-modal__content-item-makeup-list-item">Красный лук</li>
+                    <li className="product-modal__content-item-makeup-list-item">Листья салата</li>
+                    <li className="product-modal__content-item-makeup-list-item">Соус сорчичный</li>
                   </ul>
-                  <div className="product-modal_content-item_makeup-weight">520г, ккал 430</div>
+                  <div className=" product-modal__content-item-makeup-weight">520г, ккал 430</div>
+                </div>
+                </div>
                 </div>
               </div>
             </div>
-            <div className="product-modal_content-action">
-              <div className="modal-cart_submit" onClick={() => { addToCart(selectedProduct); closeProductModal(); }}>
+            <div className="product-modal__content-action">
+              <div className="product-modal__content-action-btn" onClick={() => { addToCart(selectedProduct); closeProductModal(); }}>
                 Добавить
               </div>
+              <div className="product-modal__content-action-cost">{selectedProduct.price}₽</div>
             </div>
           </div>
         </div>

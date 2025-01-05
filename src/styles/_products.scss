@@ -2,11 +2,21 @@
 @import 'mixins';
 
 .products {
+    @include respond-to(large) {
+        width: 100%;
+    }
     &__inner {
         margin: 30px $space-medium 0;
 
-        @media (min-width: 570px) {
+        @include respond-to(small) {
             margin: 30px 30px 0;
+        }
+        @include respond-to(medium) {
+            margin: 30px 64px 0;
+        }
+
+        @include respond-to(large) {
+            margin: 0;
         }
     }
 
@@ -15,6 +25,12 @@
         font-weight: $font-weight-bold;
         line-height: $line-height-large;
         margin-bottom: 16px;
+
+        @include respond-to(large) {
+            font-size: 40px;
+            line-height: 48px;
+            margin-bottom: 24px;
+        }
     }
 
     &__list {
@@ -26,18 +42,40 @@
         &-item {
             @include flex-column;
             background-color: $color-light-gray;
-            padding: $space-small;
+            padding: 8px;
             @include border-radius(12px);
             box-sizing: border-box;
             width: calc(50% - 10px);
 
-            @media (min-width: 470px) {
+            @include respond-to(x-small) {
                 width: calc(33% - 10px);
+            }
+
+            @include respond-to(medium) {
+                width: calc(25% - 10px);
+            }
+
+            @include respond-to(large) {
+                width: calc(50% - 10px);
+
+                padding: 12px;
+                @include border-radius(18px);
+            }
+
+            @include respond-to(x-large) {
+                width: calc(33% - 11px);
+
             }
         }
 
-        @media (min-width: 470px) {
+        @include respond-to(x-small) {
             gap: 17px;
+        }
+        @include respond-to(medium) {
+            gap: 13px
+        }
+        @include respond-to(large) {
+            gap: 20px;
         }
     }
 
@@ -47,6 +85,12 @@
             max-height: 120px;
             @include border-radius(8px);
             margin-bottom: $space-medium;
+            object-fit: cover;
+
+            @include respond-to(large) {
+                max-height: 220px;
+                margin-bottom: 16px;
+            }
         }
 
         &-desc {
@@ -56,16 +100,33 @@
             &-main {
                 margin-bottom: 16px;
 
+                @include respond-to(large) {
+                    @include flex-column;
+                    gap: 8px;
+                    margin-bottom: 30px;
+                }
                 &-cost {
                     font-size: $font-size-medium;
                     font-weight: $font-weight-bold;
                     line-height: $line-height-normal;
+
+                    @include respond-to(large) {
+                        font-size: 24px;
+                        font-weight: $font-weight-bold;
+                        line-height: 24px;
+                    }
                 }
 
                 &-name {
                     font-size: $font-size-small;
                     font-weight: $font-weight-normal;
                     line-height: $line-height-normal;
+
+                    @include respond-to(large) {
+                        font-size: 16px;
+                        font-weight: $font-weight-normal;
+                        line-height: 20.8px;
+                    }
                 }
             }
 
@@ -75,6 +136,11 @@
                 font-weight: $font-weight-bold;
                 line-height: $line-height-normal;
                 margin-bottom: 7px;
+
+                @include respond-to(large) {
+                    font-size: 16px;
+                    font-weight: $font-weight-bold;
+                }
             }
         }
 
@@ -86,6 +152,12 @@
             line-height: 12px;
             background-color: $color-dark-gray;
             text-align: center;
+
+            @include respond-to(large) {
+                font-size: 16px;
+                line-height: 16px;
+                padding: 12px 41px;
+            }
         }
     }
 }

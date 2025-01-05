@@ -5,6 +5,15 @@
     &__inner {
         margin-top: 30px;
         margin-bottom: 30px;
+
+        @include respond-to(medium) {
+            margin-bottom: 36px;
+        }
+
+        @include respond-to(large) {
+            margin-top: 40px;
+            margin-bottom: 50px;
+        }
     }
 
     &__slider {
@@ -18,6 +27,9 @@
         @include border-radius(30px);
         max-height: 30px;
 
+        @include respond-to(large) {
+            padding: 9px;
+        }
 
         &-image {
             max-width: 24px;
@@ -30,6 +42,11 @@
             font-size: $font-size-small;
             font-weight: $font-weight-normal;
             line-height: 16.37px;
+
+            @include respond-to(large) {
+                font-size: 16px;
+                line-height: 21.82px;
+            }
         }
         
         &--choosed {

@@ -1,5 +1,19 @@
-@use 'vars';
+@import 'vars';
+@import 'mixins';
 body {
     overflow-x: hidden;
-    background-color: vars.$color-dark-gray;
+    background-color: $color-dark-gray;
+}
+
+.block {
+    @include respond-to(large) {
+        padding: 0px 32px;
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+    }
+
+    @include respond-to(xx-large) {
+        padding: 0px 75px;
+    }
 }

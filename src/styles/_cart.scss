@@ -1,20 +1,40 @@
 @import 'vars';
 @import 'mixins';
 .cart {
+    @include respond-to(large) {
+        display: none;
+    }
+
+    &-desktop {
+        display: none;
+
+        @include respond-to(large) {
+            display: block;
+            margin-top: calc(48px + 24px);
+        }
+    }
     &__inner {
         margin: 0px $space-medium 0px;
         background-color: $color-light-gray;
         padding: 16px $space-medium;
         @include border-radius(12px);
 
-        @media (min-width: $breakpoint-xs-sm) {
+        @include respond-to(x-small) {
             max-width: 145px;
         }
         
-        @media (min-width: 570px) {
+        @include respond-to(small) {
             margin: 0px 30px 0px;
         }
-    }
+
+        @include respond-to(medium) {
+            margin: 0px 54px 0px;
+        }
+
+        @include respond-to(large) {
+            padding: $space-large 16px;
+        }
+     }
 
     &__header {
         @include flex-between;
@@ -23,6 +43,12 @@
             font-size: $font-size-medium;
             font-weight: $font-weight-bold;
             line-height: 16px;
+
+            @include respond-to(large) {
+                font-size: 24px;
+                font-weight: 600;
+                line-height: 24px;
+            }
         }
         
         &-count {
@@ -32,6 +58,12 @@
             line-height: 13.64px;
             background-color: $color-dark-gray;
             @include border-radius(6px);
+
+            @include respond-to(large) {
+                padding: 2px 16px;
+                font-size: 12px;
+                line-height: 16.37px;
+            }
         }
     }
 
@@ -39,12 +71,20 @@
         @include flex-center;
         margin-top: $space-large;
         font-size: $font-size-small;
-        font-weight: $font-weight-bold;
+        font-weight: 100;
         line-height: $line-height-normal;
+
+        @include respond-to(large) {
+            font-size: $font-size-medium;
+        }
     }
 
     &__products {
         margin-top: 8px;
+
+        @include respond-to(large) {
+            margin-top: 12px;
+        }
 
         &-item {
             padding-top: 10px;
@@ -52,6 +92,11 @@
             gap: 6;
             border-top: 1px solid $color-dark-gray;
             margin: 8px 0px;
+
+            @include respond-to(large) {
+                padding-top: 16px;
+                margin-bottom: 16px;
+            }
 
             &-info {
                 display: flex;
@@ -99,12 +144,17 @@
                 border-radius: 8px;
                 gap: 19px;
 
+                @include respond-to(large) {
+                    padding: 9px 12px;
+                }
+
                 &-element {
                     font-size: $font-size-small;
                     font-weight: $font-weight-normal;
                     line-height: 16.37px;
                 }
             }
+
         }
     }
 }
@@ -118,6 +168,14 @@
 
     &__content {
         position: relative;
+
+        @include respond-to(large) {
+            position: static;
+        }
+    }
+
+    @include respond-to(large) {
+        position: static;
     }
 }
 
@@ -129,13 +187,22 @@
         background-color: $color-light-gray;
         padding: 16px $space-medium;
         @include border-radius(12px);
+        
 
-        @media (min-width: $breakpoint-xs-sm) {
+        @include respond-to(x-small) {
             max-width: 300px;
         }
-
-        @media (min-width: 570px) {
+        @include respond-to(small) {
             margin: 0px 20px 0px;
+        }
+        @include respond-to(medium) {
+            margin: 0px 45px 0px;
+        }
+        @include respond-to(large) {
+            width: 300px;
+            position: static;
+            margin: 0px;
+            padding: 16px;
         }
     }
 
@@ -145,10 +212,20 @@
         font-size: 12px;
         font-weight: 400;
         line-height : 15.6px;
+
+        @include respond-to(large) {
+            font-size: 16px;
+            line-height: 20.8px;
+            margin-bottom: 24px;
+        }
     }
 
     &__submit {
         @include button($color-secondary, $color-light-gray, 9px 0px, 8px, 12px, 400);
+
+        @include respond-to(large) {
+            @include button($color-secondary, $color-light-gray, 12px 0px, 12px, 16px, 400);
+        }
     }
 
     &__footer {
@@ -169,7 +246,14 @@
                 font-size: 10px;
                 font-weight: $font-weight-normal;
                 line-height: 13.64px;
+
+                @include respond-to(large) {
+                    font-size: 12px;
+                    line-height: 16.37px;
+                }
             }
+
+
         }
 
         &-close {

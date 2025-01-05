@@ -16,24 +16,52 @@
         width: 100vw;
     }
 
-    &__inner { 
+    &__inner {
         padding: $space-large $space-medium;
         position: relative;
         @include flex-center;
         @include flex-column;
+
+        @include respond-to(large) {
+            padding: 64px 32px;
+        }
     }
 
     &__logo {
         margin-bottom: $space-large;
         max-width: 150px;
+        object-fit: cover;
+
+        @include respond-to(medium) {
+            max-width: 227px;
+        }
+
+        @include respond-to(large) {
+            max-width: 326px;
+        }
     }
 
     &__content {
         @include flex-center;
         @include flex-column;
-        margin-bottom: 16px;
+        margin-bottom: 44px;
 
-        &-typography {
+        &-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            margin-bottom: 19px;
+
+
+            @include respond-to(medium) {
+                flex-direction: column;
+                text-align: left;
+                align-items: flex-start;
+            }
+        }
+
+        &-slogan {
             color: $color-light-gray;
             font-size: $font-size-large;
             font-weight: 800;
@@ -41,9 +69,21 @@
             text-underline-position: from-font;
             text-decoration-skip-ink: none;
             text-align: center;
+            margin-bottom: 16px;
 
             span {
                 color: $color-secondary;
+            }
+
+            @include respond-to(medium) {
+                text-align: left;
+                margin-bottom: 26px;
+            }
+
+            @include respond-to(large) {
+                font-size: 50px;
+                font-weight: 800;
+                line-height: 60px;
             }
         }
 
@@ -52,7 +92,18 @@
             font-size: $font-size-small;
             font-weight: $font-weight-normal;
             line-height: 16.37px;
-            margin-bottom: 19px;
+
+            @include respond-to(large) {
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 21.82px;
+            }
+        }
+
+        @include respond-to(medium) {
+            flex-direction: row-reverse;
+            align-items: center;
+            gap: 10px;
         }
     }
 
