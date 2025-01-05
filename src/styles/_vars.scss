@@ -1,0 +1,29 @@
+// Цвета
+$color-primary: rgba(255, 171, 8, 1);
+$color-secondary: rgba(255, 112, 32, 1);
+$color-black: rgba(0, 0, 0, 1);
+$color-light-gray: rgba(249, 249, 249, 1);
+$color-dark-gray: rgba(242, 242, 243, 1);
+$color-gray: rgba(177, 177, 177, 1);
+
+// Шрифты
+$font-size-small: 12px;
+$font-size-medium: 16px;
+$font-size-large: 28px;
+$font-weight-normal: 400;
+$font-weight-bold: 600;
+$line-height-normal: 15.6px;
+$line-height-large: 33.6px;
+
+// Отступы
+$space-small: 4px;
+$space-medium: 10px;
+$space-large: 24px;
+
+// Поинты
+
+$breakpoint-xs: 320px;
+$breakpoint-xs-sm: 475px;
+$breakpoint-sm: 768px;
+$breakpoint-md: 1024px;
+$breakpoint-lg: 1440px;

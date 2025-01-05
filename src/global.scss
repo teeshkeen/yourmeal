@@ -1,0 +1,20 @@
+@use 'styles/reset';
+@use 'styles/common';
+@use 'styles/header';
+@use 'styles/categories';
+@use 'styles/cart';
+@use 'styles/products';
+@use 'styles/footer';
+@use 'styles/productmodal';
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap'); // Переместите @import перед @use
+
+.app {
+    position: relative;
+    font-family: 'Nunito', serif;
+    // padding: 0px 24px 0px;
+
+    @media (min-width: 570px) {
+        // padding: 0px 36px 0px;
+    }
+}
+

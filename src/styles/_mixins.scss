@@ -1,0 +1,51 @@
+@mixin flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin flex-between {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+@mixin flex-column {
+	display: flex;
+	flex-direction: column;
+}
+
+@mixin border-radius($radius) {
+	border-radius: $radius;
+}
+
+@mixin button($bg-color, $text-color, $padding: 10px 20px, $border-radius: 8px, $font-size: 12px, $font-weight: 400) {
+	background-color: $bg-color;
+	color: $text-color;
+	padding: $padding;
+	border-radius: $border-radius;
+	font-size: $font-size;
+	font-weight: $font-weight;
+	text-align: center;
+	border: none; // Убираем стандартные границы
+	cursor: pointer; // Указатель при наведении
+	transition: background-color 0.3s; // Плавный переход цвета фона
+
+	&:hover {
+		background-color: darken($bg-color, 10%); // Затемнение фона при наведении
+	}
+}
+
+@mixin respond-to($media) {
+	@if $media == mobile {
+		@media (max-width: 768px) {
+			@content;
+		}
+	}
+
+	@else if $media == tablet {
+		@media (max-width: 1024px) {
+			@content;
+		}
+	}
+}

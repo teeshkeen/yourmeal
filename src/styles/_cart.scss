@@ -1,0 +1,182 @@
+@import 'vars';
+@import 'mixins';
+.cart {
+    &__inner {
+        margin: 0px $space-medium 0px;
+        background-color: $color-light-gray;
+        padding: 16px $space-medium;
+        @include border-radius(12px);
+
+        @media (min-width: $breakpoint-xs-sm) {
+            max-width: 145px;
+        }
+        
+        @media (min-width: 570px) {
+            margin: 0px 30px 0px;
+        }
+    }
+
+    &__header {
+        @include flex-between;
+
+        &-title {
+            font-size: $font-size-medium;
+            font-weight: $font-weight-bold;
+            line-height: 16px;
+        }
+        
+        &-count {
+            padding: 1px 13px;
+            font-size: 10px;
+            font-weight: $font-weight-normal;
+            line-height: 13.64px;
+            background-color: $color-dark-gray;
+            @include border-radius(6px);
+        }
+    }
+
+    &__empty {
+        @include flex-center;
+        margin-top: $space-large;
+        font-size: $font-size-small;
+        font-weight: $font-weight-bold;
+        line-height: $line-height-normal;
+    }
+
+    &__products {
+        margin-top: 8px;
+
+        &-item {
+            padding-top: 10px;
+            @include flex-between;
+            gap: 6;
+            border-top: 1px solid $color-dark-gray;
+            margin: 8px 0px;
+
+            &-info {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+
+            &-image {
+                width: 64px;
+                height: 52px;
+                @include border-radius(8px);
+            }
+
+            &-text {
+                @include flex-column;
+
+                &-title {
+                    font-size: $font-size-small;
+                    font-weight: $font-weight-normal;
+                    line-height: 16.37px;
+                    margin-bottom: 1px;
+                }
+
+                &-weight {
+                    font-size: $font-size-small;
+                    font-weight: $font-weight-normal;
+                    line-height: 16.37px;
+                    color: $color-gray;
+                    margin-bottom: 6px;
+                }
+
+                &-cost {
+                    font-size: $font-size-small;
+                    font-weight: $font-weight-normal;
+                    line-height: 16.37px;
+                }
+            }
+
+            &-counter {
+                @include flex-between;
+
+                padding: 7px 8px;
+                max-height: 30px;
+                background-color: $color-dark-gray;
+                border-radius: 8px;
+                gap: 19px;
+
+                &-element {
+                    font-size: $font-size-small;
+                    font-weight: $font-weight-normal;
+                    line-height: 16.37px;
+                }
+            }
+        }
+    }
+}
+
+// Модальное окно корзины
+.cart-modal {
+    position: absolute;
+    z-index: 1000;
+    width: calc(100% - 0px);
+    max-height: 390px;
+
+    &__content {
+        position: relative;
+    }
+}
+
+.modal-cart {
+    &__inner {
+        position: absolute;
+        right: $space-medium;
+        left: $space-medium;
+        background-color: $color-light-gray;
+        padding: 16px $space-medium;
+        @include border-radius(12px);
+
+        @media (min-width: $breakpoint-xs-sm) {
+            max-width: 300px;
+        }
+
+        @media (min-width: 570px) {
+            margin: 0px 20px 0px;
+        }
+    }
+
+    &__total {
+        @include flex-between;
+        margin-bottom: 19px;
+        font-size: 12px;
+        font-weight: 400;
+        line-height : 15.6px;
+    }
+
+    &__submit {
+        @include button($color-secondary, $color-light-gray, 9px 0px, 8px, 12px, 400);
+    }
+
+    &__footer {
+        @include flex-between;
+        margin-top: 8px;
+
+        &-delivery {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            img {
+                width: 24px;
+                height: 24px;
+            }
+
+            span {
+                font-size: 10px;
+                font-weight: $font-weight-normal;
+                line-height: 13.64px;
+            }
+        }
+
+        &-close {
+            font-size: 10px;
+            font-weight: $font-weight-normal;
+            line-height: 13.64px;
+            color: $color-gray;
+        }
+    }
+}

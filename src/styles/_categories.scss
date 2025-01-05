@@ -1,0 +1,41 @@
+@import 'vars';
+@import 'mixins';
+.categories {
+
+    &__inner {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    &__slider {
+        margin: 0 auto;
+    }
+
+    .slider__item {
+        background-color: $color-light-gray;
+        @include flex-center;
+        padding: 8px;
+        @include border-radius(30px);
+        max-height: 30px;
+
+
+        &-image {
+            max-width: 24px;
+            max-height: 24px;
+            margin-right: 8px;
+        }
+
+        &-name {
+            color: $color-black;
+            font-size: $font-size-small;
+            font-weight: $font-weight-normal;
+            line-height: 16.37px;
+        }
+        
+        &--choosed {
+            background-color: $color-primary;
+        }
+    }
+
+    
+}
