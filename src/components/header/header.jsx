@@ -1,5 +1,5 @@
-import Logo from '../assets/images/logo.svg';
-import Burger from '../assets/images/burger.svg';
+import Logo from '../../assets/images/logo.svg';
+import Burger from '../../assets/images/burger.svg';
 
 const Header = () => {
   return (

@@ -1,4 +1,4 @@
-import closeIcon from '../assets/icons/close.svg';
+import closeIcon from '../../assets/icons/close.svg';
 
 const ProductModal = ({ selectedProduct, closeProductModal, addToCart }) => {
   return (
@@ -35,7 +35,7 @@ const ProductModal = ({ selectedProduct, closeProductModal, addToCart }) => {
           <div className="product-modal__content-action-btn" onClick={() => { addToCart(selectedProduct); closeProductModal(); }}>
             Добавить
           </div>
- <div className="product-modal__content-action-cost">{selectedProduct.price}₽</div>
+        <div className="product-modal__content-action-cost">{selectedProduct.price}₽</div>
         </div>
       </div>
     </div>

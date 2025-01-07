@@ -1,5 +1,5 @@
-@import 'vars';
-@import 'mixins';
+@import '../../styles/vars';
+@import '../../styles/mixins';
 
 .product-modal {
     position: fixed;
@@ -10,31 +10,6 @@
     left: 0;
     background-color: $color-light-gray;
 
-    @include respond-to(x-small) {
-        width: 70%;
-        max-width: 400px;
-        height: auto;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        @include border-radius(12px);
-    }
-
-    @include respond-to(medium) {
-        width: 70%;
-        max-width: 524px;
-        height: auto;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        @include border-radius(12px);
-    }
-
-    @include respond-to(large) {
-        max-width: 684px;
-    }
-
-
     &__content {
         position: relative;
         @include flex-between;
@@ -43,20 +18,6 @@
 
         color: black;
         padding: $space-medium;
-
-        @include respond-to(x-small) {
-            padding: 16px;
-            align-items: flex-start;
-
-        }
-
-        @include respond-to(medium) {
-            padding: 24px 16px;
-        }
-
-        @include respond-to(large) {
-            padding: 24px;
-        }
 
         &-close {
             display: flex;
@@ -187,6 +148,42 @@
             }
         }
 
+        @include respond-to(x-small) {
+            padding: 16px;
+            align-items: flex-start;
 
+        }
+
+        @include respond-to(medium) {
+            padding: 24px 16px;
+        }
+
+        @include respond-to(large) {
+            padding: 24px;
+        }
+    }
+
+    @include respond-to(x-small) {
+        width: 70%;
+        max-width: 400px;
+        height: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        @include border-radius(12px);
+    }
+
+    @include respond-to(medium) {
+        width: 70%;
+        max-width: 524px;
+        height: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        @include border-radius(12px);
+    }
+
+    @include respond-to(large) {
+        max-width: 684px;
     }
 }

@@ -1,5 +1,6 @@
-@import 'vars';
-@import 'mixins';
+@import '../../styles/vars';
+@import '../../styles/mixins';
+
 .categories {
 
     &__inner {
@@ -27,9 +28,7 @@
         @include border-radius(30px);
         max-height: 30px;
 
-        @include respond-to(large) {
-            padding: 9px;
-        }
+        cursor: pointer;
 
         &-image {
             max-width: 24px;
@@ -52,7 +51,21 @@
         &--choosed {
             background-color: $color-primary;
         }
-    }
 
-    
+        &:hover {
+            position: relative;
+            color: white;
+            background-color: $color-primary;
+            transition: 0.3s;
+        }
+
+        &:active {
+            background-color: $color-secondary;
+            transition: 0.3s
+        }
+
+        @include respond-to(large) {
+            padding: 9px;
+        }
+    }
 }

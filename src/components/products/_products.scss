@@ -1,16 +1,15 @@
-@import 'vars';
-@import 'mixins';
+@import '../../styles/vars';
+@import '../../styles/mixins';
 
 .products {
-    @include respond-to(large) {
-        width: 100%;
-    }
+
     &__inner {
         margin: 30px $space-medium 0;
 
         @include respond-to(small) {
             margin: 30px 30px 0;
         }
+
         @include respond-to(medium) {
             margin: 30px 64px 0;
         }
@@ -36,59 +35,66 @@
     &__list {
         display: flex;
         flex-wrap: wrap;
-        gap: 16px;
+        gap: 20px;
         width: 100%;
 
-        &-item {
-            @include flex-column;
-            background-color: $color-light-gray;
-            padding: 8px;
-            @include border-radius(12px);
-            box-sizing: border-box;
-            width: calc(50% - 10px);
-
-            @include respond-to(x-small) {
-                width: calc(33% - 10px);
-            }
-
-            @include respond-to(medium) {
-                width: calc(25% - 10px);
-            }
-
-            @include respond-to(large) {
-                width: calc(50% - 10px);
-
-                padding: 12px;
-                @include border-radius(18px);
-            }
-
-            @include respond-to(x-large) {
-                width: calc(33% - 11px);
-
-            }
+        &--empty {
+            font-size: $font-size-large;
         }
 
         @include respond-to(x-small) {
             gap: 17px;
         }
+
         @include respond-to(medium) {
             gap: 13px
         }
+
         @include respond-to(large) {
             gap: 20px;
         }
     }
 
     &__item {
+        @include flex-column;
+        background-color: $color-light-gray;
+        padding: 8px;
+        @include border-radius(12px);
+        box-sizing: border-box;
+        width: calc(50% - 10px);
+
         &-image {
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
             max-width: 100%;
-            max-height: 120px;
-            @include border-radius(8px);
+            height: 120px;
             margin-bottom: $space-medium;
             object-fit: cover;
+            @include border-radius(8px);
+
+            img {
+                min-width: 100%;
+                max-height: 100%;
+                object-fit: cover;
+            }
+
 
             @include respond-to(large) {
-                max-height: 220px;
+                height: 235px;
+                @include border-radius(8px);
+                margin-bottom: 16px;
+            }
+
+            @include respond-to(x-large) {
+                height: 250px;
+                @include border-radius(8px);
+                margin-bottom: 16px;
+            }
+
+            @include respond-to(xx-large) {
+                height: 300px;
+                @include border-radius(8px);
                 margin-bottom: 16px;
             }
         }
@@ -100,11 +106,6 @@
             &-main {
                 margin-bottom: 16px;
 
-                @include respond-to(large) {
-                    @include flex-column;
-                    gap: 8px;
-                    margin-bottom: 30px;
-                }
                 &-cost {
                     font-size: $font-size-medium;
                     font-weight: $font-weight-bold;
@@ -127,6 +128,12 @@
                         font-weight: $font-weight-normal;
                         line-height: 20.8px;
                     }
+                }
+
+                @include respond-to(large) {
+                    @include flex-column;
+                    gap: 8px;
+                    margin-bottom: 30px;
                 }
             }
 
@@ -153,11 +160,51 @@
             background-color: $color-dark-gray;
             text-align: center;
 
+            cursor: pointer;
+
+            &:hover {
+                background-color: $color-primary;
+                transition: 0.3s;
+            }
+
+            &:active {
+                background-color: $color-secondary;
+                transition: 0.3s;
+            }
+
             @include respond-to(large) {
                 font-size: 16px;
                 line-height: 16px;
                 padding: 12px 41px;
             }
         }
+
+        @include respond-to(x-small) {
+            width: calc(33% - 10px);
+        }
+
+        @include respond-to(medium) {
+            width: calc(25% - 10px);
+        }
+
+        @include respond-to(large) {
+            width: calc(50% - 10px);
+
+            padding: 12px;
+            @include border-radius(18px);
+        }
+
+        @include respond-to(x-large) {
+            width: calc(33% - 11px);
+
+        }
+    }
+
+    &__empty {
+        text-align: center;
+    }
+
+    @include respond-to(large) {
+        width: 100%;
     }
 }

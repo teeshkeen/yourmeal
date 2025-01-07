@@ -1,11 +1,11 @@
 @use 'styles/reset';
 @use 'styles/common';
-@use 'styles/header';
-@use 'styles/categories';
-@use 'styles/cart';
-@use 'styles/products';
-@use 'styles/footer';
-@use 'styles/productmodal';
+@use 'components/header/header';
+@use 'components/categories/categories';
+@use 'components/cart/cart';
+@use 'components/products/products';
+@use 'components/footer/footer';
+@use 'components/productModal/productmodal';
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap'); // Переместите @import перед @use
 
 .app {

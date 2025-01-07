@@ -1,5 +1,6 @@
 import React from 'react'
-import deliveryIcon from '../assets/icons/delivery.svg';
+import deliveryIcon from '../../assets/icons/delivery.svg';
+
 const CartDesktop = ({cart, calculateTotal, calculateTotalQuantity, updateQuantity}) => {
   return (
     <div className="cart-desktop">
@@ -18,11 +19,11 @@ const CartDesktop = ({cart, calculateTotal, calculateTotalQuantity, updateQuanti
                     {cart.map(item => (
                       <div className="cart__products-item" key={item.id}>
                         <div className='cart__products-item-info'>
-                          <img className='cart__products-item-image' src={item.image} alt={item.name} />
-                          <div className="cart__products-item-text">
-                            <div className="cart__products-item-text-title">{item.name}</div>
-                            <div className="cart__products-item-text-weight">{item.weight}</div>
-                            <div className="cart__products-item-text-cost">{item.price}₽</div>
+                          <img className='cart__products-item-info-image' src={item.image} alt={item.name} />
+                          <div className="cart__products-item-info-text">
+                            <div className="cart__products-item-info-text-title">{item.name}</div>
+                            <div className="cart__products-item-info-text-weight">{item.weight}</div>
+                            <div className="cart__products-item-info-text-cost">{item.price}₽</div>
                           </div>
                         </div>
                         <div className="cart__products-item-counter">
