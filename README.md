@@ -9,6 +9,7 @@
 - REACT
 - SCSS
 - BEM
+- Swiperjs
 - FIGMA
 
 
